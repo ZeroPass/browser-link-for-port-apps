@@ -1,7 +1,8 @@
 
 # Port webapp login
 
-Login widget creates connection to Port app (using QR code, magnet link or simple copy-paste function). 
+Login widget creates connection to Port app (using QR code, magnet link or simple copy-paste function).  
+[View demo.](https://htmlpreview.github.io/?https://github.com/ZeroPass/port-web-login/blob/main/index.html)
 
 ## Installation
 
