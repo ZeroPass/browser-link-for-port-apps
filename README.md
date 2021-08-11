@@ -13,7 +13,7 @@ Port is simple html widget (ligthweight) - no additional packages needed.
 
 - All-in-one (no CORS alerts)
 ```
-Run [index](index.html) from base folder
+Run [index.html](index) from base folder
 ```
 
 - Separated .js files (run on server)
@@ -22,7 +22,13 @@ Run [index](index.html) from base folder
 Run [loginSeparatedFile/index.html](loginSeparatedFile/index.html) file 
 ```
 
+## Prerequirements
+
+Create [dynamic link ](https://firebase.google.com/docs/dynamic-links/create-links) with one of four options on Firebase platform. You dont need to create entire dynamic link, only dynamic_link url is required. Other parametes is created by script in this repository.
+
+
 ## Implementation on website
+
 Include JavaScript files to the project:
 ```
 <script src="js/login.js"></script>
@@ -41,8 +47,23 @@ Call the render script:
  function renderPortQR(settings, containerName) {
    ZeroPassPortWidget.render(settings, containerName);
  }
+ 
+ var androidData = {"apn":"<apn>",
+                    "afl":"<link_to_play_store>",
+                "version":'<min_sdk_version>'};
 
- renderPortQR({ 
+ var iosData = {"ibi":"<apple_store_id>",
+                "isi":"<link_to_app_store>",
+                "imv":<min_ios_version_integer>}
+
+ var shortLinkURL = "<short_link>";
+ var deepLinkURL = "<deep_link>";
+
+ renderPortQR(shortLinkURL,
+              deepLinkURL,
+              androidData,
+              iosData,
+               { 
                 userID: "<user_id>",
                 requestType: "<request_type>", //only ATTESTATION_REQUEST, PERSONAL_INFORMATION_REQUEST, FAKE_PERSONAL_INFORMATION_REQUEST, LOGIN allowed
                 url: "<url>"
