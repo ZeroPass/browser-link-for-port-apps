@@ -24,13 +24,30 @@
     <section id="zeropass-port-qr"></section>
   </div>
   <script>
-    function renderPortQR(settings, containerName) {
-      ZeroPassPortWidget.render(settings, containerName);
+    function renderPortQR(shorLinkURL, deepLinkURL, androidData, iosData, settings, containerName) {
+      ZeroPassPortWidget.render(shorLinkURL, deepLinkURL, androidData, iosData, settings, containerName);
     }
 
-    renderPortQR({userID: "randomUser", 
+
+    var androidData = {"apn":"io.zeropass.port",
+                        "afl":"urlsomething",
+                        "version":'0.1'};
+
+    var iosData = {"ibi":"io.zeropass.port",
+                    "isi":"app.store.port.zeropass.somehing",
+                    "imv":10}
+
+    var shortLinkURL = "https://portapp.page.link";
+    var deepLinkURL = "https://portapp.page.link/homeMagnetLink";
+
+    renderPortQR(shortLinkURL,
+                  deepLinkURL,
+                  androidData,
+                  iosData,
+                  {userID: "randomUser", 
                   requestType: "attestation_request",
-                  url: "https://163.172.144.187"
+                  url: "https://163.172.144.187",
+                  version: 0.1
                   },
                   document.querySelector('#zeropass-port-qr'));
   </script>
