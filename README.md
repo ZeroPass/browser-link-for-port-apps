@@ -1,7 +1,6 @@
-
 # Port webapp login
 
-Login widget creates connection to Port app (using QR code, magnet link or simple copy-paste function).  
+Login widget creates connection to Port app (using QR code, magnet link or simple copy-paste function).
 [View demo.](https://htmlpreview.github.io/?https://github.com/ZeroPass/port-web-login/blob/main/index.html)
 
 ## Installation
@@ -19,7 +18,7 @@ Run [index.html](index) from base folder
 - Separated .js files (run on server)
 
 ```
-Run [loginSeparatedFile/index.html](loginSeparatedFile/index.html) file 
+Run [loginSeparatedFile/index.html](loginSeparatedFile/index.html) file
 ```
 
 ## Prerequirements
@@ -30,47 +29,51 @@ Create [dynamic link ](https://firebase.google.com/docs/dynamic-links/create-lin
 ## Implementation on website
 
 Include JavaScript files to the project:
-```
+
+```html
 <script src="js/login.js"></script>
 ```
 
 Create div section; where widget will be presented:
-```
+
+```html
 <div class="divqr">
    <section id="zeropass-port-qr"></section>
 </div>
 ```
 
 Call the render script:
-```
+
+```html
 <script>
- function renderPortQR(settings, containerName) {
-   ZeroPassPortWidget.render(settings, containerName);
- }
- 
- var androidData = {"apn":"<apn>",
-                    "afl":"<link_to_play_store>",
-                "version":'<min_sdk_version>'};
+function renderPortQR(settings, containerName) {
+  ZeroPassPortWidget.render(settings, containerName);
+}
 
- var iosData = {"ibi":"<apple_store_id>",
-                "isi":"<link_to_app_store>",
-                "imv":<min_ios_version_integer>}
+var androidData = {"apn":"<apn>",
+                  "afl":"<link_to_play_store>",
+                  "version":'<min_sdk_version>'};
 
- var shortLinkURL = "<short_link>";
- var deepLinkURL = "<deep_link>";
+var iosData = {"ibi":"<apple_store_id>",
+              "isi":"<link_to_app_store>",
+              "imv":"<min_ios_version_integer>"};
 
- renderPortQR(shortLinkURL,
-              deepLinkURL,
-              androidData,
-              iosData,
-               { 
-                userID: "<user_id>",
-                requestType: "<request_type>", //only ATTESTATION_REQUEST, PERSONAL_INFORMATION_REQUEST, FAKE_PERSONAL_INFORMATION_REQUEST, LOGIN allowed
-                url: "<url>"
-              },
-              document.querySelector('#zeropass-port-qr'));
+var shortLinkURL = "<short_link>";
+var deepLinkURL = "<deep_link>";
+
+renderPortQR(shortLinkURL,
+            deepLinkURL,
+            androidData,
+            iosData,
+            {
+              userID: "<user_id>",
+              requestType: "<request_type>", //only ATTESTATION_REQUEST, PERSONAL_INFORMATION_REQUEST, FAKE_PERSONAL_INFORMATION_REQUEST, LOGIN allowed
+              url: "<url>"
+            },
+            document.querySelector('#zeropass-port-qr'));
 </script>
 ```
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
