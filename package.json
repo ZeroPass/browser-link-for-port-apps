@@ -1,0 +1,27 @@
+{
+  "name": "browser-link-for-port-apps",
+  "version": "1.0.0",
+  "description": "Login widget creates connection to Port app (using QR code, magnet link or simple copy-paste function).",
+  "main": "js/browser-link-for-port-apps-npm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZeroPass/browser-link-for-port-apps.git"
+  },
+  "keywords": [
+    "qr",
+    "link",
+    "connection",
+    "npm",
+    "node",
+    "browser"
+  ],
+  "author": "ZeroPass Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZeroPass/browser-link-for-port-apps/issues"
+  },
+  "homepage": "https://github.com/ZeroPass/browser-link-for-port-apps#readme"
+}
