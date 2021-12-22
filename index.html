@@ -14,20 +14,23 @@
   </div>
   <script>
     var androidData = {"apn":"io.zeropass.port",
-                        "afl":"urlsomething",
+                        "afl":"https://play.google.com/store/apps/details?id=io.zeropass.port",
                         "version":'0.1'};
 
     var iosData = {"ibi":"io.zeropass.port",
-                    "isi":"app.store.port.zeropass.somehing",
+                    "isi":"1596748294",
                     "imv":10}
 
     var shortLinkURL = "https://portapp.page.link";
     var deepLinkURL = "https://portapp.page.link/homeMagnetLink";
 
+    var linkOtherPlatforms = 'https://port.link/';
+
     ZeroPassPortWidget.render(shortLinkURL,
                   deepLinkURL,
                   androidData,
                   iosData,
+                  linkOtherPlatforms,
                   {userID: "randomUser", 
                   requestType: "attestation_request",
                   url: "https://portdevq8mjmnrw-portdev1.functions.fnc.fr-par.scw.cloud",

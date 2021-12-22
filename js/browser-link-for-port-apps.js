@@ -1628,7 +1628,13 @@ function createIOSParams(URLSearchParams, iosParams){
     return URLSearchParams;
 }
 
-function createDynamicLink(shortURLlink, deepLinkURL, portData, androidParameters, iosParameters){
+function createOtherPlatformsLinkParams(URLSearchParams, linkForOtherPlatforms){
+    URLSearchParams.append("ofl", linkForOtherPlatforms);
+
+    return URLSearchParams;
+}
+
+function createDynamicLink(shortURLlink, deepLinkURL, portData, androidParameters, iosParameters, otherPlatformsLink){
     if (checkAndroidParameters(androidParameters) == false || checkIOSparamters(iosParameters) == false){
         console.log ("createDynamicLink; parameters do not follow dynamic link rules");
         return;
@@ -1638,6 +1644,7 @@ function createDynamicLink(shortURLlink, deepLinkURL, portData, androidParameter
 
     dynamicLink.search = createAndroidParams(urlSearchParams, androidParameters);
     dynamicLink.search = createIOSParams(urlSearchParams, iosParameters);
+    dynamicLink.search = createOtherPlatformsLinkParams(urlSearchParams, otherPlatformsLink);
     var deepLinkStr = createDeepLink(deepLinkURL, portData);
     return dynamicLink.toString() + '&link=' + deepLinkStr;
 }
@@ -1660,8 +1667,8 @@ function readSettings(text) {
   }
 }
 
-function renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, options) {
-    var dynamicLink = createDynamicLink(shorLinkURL, deepLinkURL, options, androidData, iosData);
+function renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, options) {
+    var dynamicLink = createDynamicLink(shorLinkURL, deepLinkURL, options, androidData, iosData, otherPlatformsLink);
 
     let container = document.querySelector('#qr-code'),
         settings = readSettings(dynamicLink);
@@ -1672,18 +1679,18 @@ function renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, options) {
 
     ///////////////////////////////////////////////////
     /*export*/ class ZeroPassPortWidget {
-    static render(shorLinkURL, deepLinkURL, androidData, iosData, config, $element) {
+    static render(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, config, $element) {
         config.app = "port.app"
-        createWidget(shorLinkURL, deepLinkURL, androidData, iosData, config, $element);
+        createWidget(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, config, $element);
     }
 }
 ZeroPassPortWidget['render'] = ZeroPassPortWidget.render;
 self['ZeroPassPortWidget'] = ZeroPassPortWidget;
 
 
-function createWidget(shorLinkURL, deepLinkURL, androidData, iosData, options, $element) {
+function createWidget(shorLinkURL, deepLinkURL, androidData, iosData,otherPlatformsLink, options, $element) {
     $element.innerHTML += widgetHTML;
-    renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, options);
+    renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, options);
 };
 
 const copyClipboard = () => {
@@ -1693,6 +1700,11 @@ const copyClipboard = () => {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
+};
+
+
+const openDeepLink = () => {
+    location.href = DATA_IN_QR;
 };
 
 var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="opacity:100" class="divbackgroundblackpl">' +
@@ -1746,19 +1758,14 @@ var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="o
 '        <div class="text1portpl">Attest</div>' +
 '        <div class="text2portpl">Scan the QR code with Port app, or press the button if the Port app is on the same device.</div>' +
 '      </div>' +
-
 '      <div class="divqrpl">' + 
 '       <section id="qr-code"></section>' +
 '       </div>' +
-
-
 '      <div class="div-buttonpl">' +
 '        <div class="textlink1pl">' +
 '          <a href="javascript:copyClipboard()" class="link-2">copy magnet link</a>' +
 '        </div>' +
-
-
-'        <a href="#" class="buttonpl w-button">Launch Port</a>' +
+'        <a href="javascript:openDeepLink()" class="buttonpl w-button">Launch Port</a>' +
 '      </div>' +
 '      <div class="divdownloadpl">' +
 '        <div class="textlink2pl">' +
