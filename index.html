@@ -26,18 +26,23 @@
 
     var linkOtherPlatforms = 'https://port.link/';
 
+    var callbackFunction = function buttonXpressed() {
+      alert("Button X was pressed.");
+  }
+
     ZeroPassPortWidget.render(shortLinkURL,
                   deepLinkURL,
                   androidData,
                   iosData,
                   linkOtherPlatforms,
-                  {userID: "randomUser", 
-                  requestType: "attestation_request",
-                  url: "https://portdevq8mjmnrw-portdev1.functions.fnc.fr-par.scw.cloud",
-                  version: 0.1
+                  callbackFunction,
+                  {
+                    userID: "randomUser", 
+                    requestType: "attestation_request",
+                    url: "https://portdevq8mjmnrw-portdev1.functions.fnc.fr-par.scw.cloud",
+                    version: 0.1
                   },
                   document.querySelector('#zeropass-port-qr'));
   </script>
 </body>
-
 </html>

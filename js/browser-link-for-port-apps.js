@@ -1492,6 +1492,7 @@ The end of 'qr-creator' library.
 **/
 
 var DATA_IN_QR = null;
+var CALLBACK_EXIT_BUTTOON = null;
 
 function checkAndroidParameters(androidParameters){
     if(androidParameters == null){
@@ -1604,9 +1605,8 @@ function createDeepLink(url, portData){
     deepLink.searchParams.append("requestType", portData.requestType);
 
     var encryptedDeepLink = encodeURIComponent(deepLink);
-    console.log(encryptedDeepLink);
-
     encryptedDeepLink += "%26url="+ encodeURIComponent(portData.url);
+
     return (encryptedDeepLink.toString());
 }
 
@@ -1679,7 +1679,8 @@ function renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatf
 
     ///////////////////////////////////////////////////
     /*export*/ class ZeroPassPortWidget {
-    static render(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, config, $element) {
+    static render(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, callbackExitButton, config, $element) {
+        CALLBACK_EXIT_BUTTOON = callbackExitButton;
         config.app = "port.app"
         createWidget(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, config, $element);
     }
@@ -1706,6 +1707,10 @@ const copyClipboard = () => {
 const openDeepLink = () => {
     location.href = DATA_IN_QR;
 };
+
+const closeButtonPressed = () => {
+    CALLBACK_EXIT_BUTTOON();
+}
 
 var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="opacity:100" class="divbackgroundblackpl">' +
 '    <div data-w-id="55797719-95b5-9f3e-d991-33150963fb19" style="opacity:100" class="divwindowpl">' +
@@ -1734,16 +1739,16 @@ var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="o
 '           </div>' +
 '           </div>' +
 '        <div class="div1xpl">' +
-'          <a href="#" class="linkblockxpl w-inline-block">' +
+'          <a href="javascript:closeButtonPressed()" class="linkblockxpl w-inline-block">' +
 '           <div style="width: 16px; margin-right: 24px;">' +
 '           <div class="xmouseover2pl">' +
 '               <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"' +
 '	             viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">' +
 '                   <style type="text/css">' +
-'               	.st0{fill:#A8A8A8;}' +
+'               	.st01{fill:#A8A8A8;}' +
 '               </style>' +
 '               <g>' +
-'	            <path class="st0" d="M504.8,45.4l-35.4-35c-9.6-9.6-25.4-9.6-35.4,0L257.6,186.9L77.8,7.1c-9.6-9.6-25.4-9.6-35.4,0L7.1,42.5' +
+'	            <path class="st01" d="M504.8,45.4l-35.4-35c-9.6-9.6-25.4-9.6-35.4,0L257.6,186.9L77.8,7.1c-9.6-9.6-25.4-9.6-35.4,0L7.1,42.5' +
 '	        	c-9.6,9.6-9.6,25.4,0,35.4l179.4,179.4L10.4,434.1c-9.6,9.6-9.6,25.4,0,35.4l35.4,35.4c9.6,9.6,25.4,9.6,35.4,0l176.5-176.5' +
 '	        	l176.5,176.5c9.6,9.6,25.4,9.6,35.4,0l35.4-35.4c9.6-9.6,9.6-25.4,0-35.4L327.9,257.6L504.4,81.2C514.4,71.2,514.4,55.4,504.8,45.4' +
 '	        	z"/>' +
