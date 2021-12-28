@@ -1,5 +1,7 @@
 'use strict';
 
+document.head.innerHTML += '<meta content="width=device-width, initial-scale=1" name="viewport">';
+
 //load fonts
 function addStylesheetURL(url) {
     var link = document.createElement('link');
