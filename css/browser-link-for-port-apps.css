@@ -418,6 +418,7 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333;
+  position: fixed;
 }
 img {
   max-width: 100%;
@@ -2229,7 +2230,7 @@ textarea.w-select {
 }
 
 .divwindowpl {
-  position: static;
+  position: fixed;
   width: 340px;
   border-radius: 30px;
   background-color: #fff;
