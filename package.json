@@ -1,6 +1,6 @@
 {
   "name": "browser-link-for-port-apps",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Login widget creates connection to Port app (using QR code, magnet link or simple copy-paste function).",
   "main": "js/browser-link-for-port-apps-npm.js",
   "scripts": {
