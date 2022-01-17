@@ -1685,16 +1685,33 @@ function renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatf
         CALLBACK_EXIT_BUTTOON = callbackExitButton;
         config.app = "port.app"
         createWidget(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, config, $element);
+        
+        //changing the opacity of the element
+        //start after 50 millisecons
+        setTimeout(function () {
+        var divBackground = $element.getElementsByClassName("divwindowpl")[0];
+        let  i = parseFloat(divBackground.style.opacity);
+        //it appears in 1 second
+        let interval = setInterval(()=>{
+          i+=0.025
+          divBackground.style.opacity = i;
+
+          if (i > 1.0)
+              clearInterval(interval);
+        },25)
+        }, 50);
     }
-}
+    }
 ZeroPassPortWidget['render'] = ZeroPassPortWidget.render;
 self['ZeroPassPortWidget'] = ZeroPassPortWidget;
 
 
 function createWidget(shorLinkURL, deepLinkURL, androidData, iosData,otherPlatformsLink, options, $element) {
     $element.innerHTML += widgetHTML;
+
     renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, options);
-};
+    
+    }
 
 const copyClipboard = () => {
     const el = document.createElement('textarea');
@@ -1714,8 +1731,8 @@ const closeButtonPressed = () => {
     CALLBACK_EXIT_BUTTOON();
 }
 
-var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="opacity:100" class="divbackgroundblackpl">' +
-'    <div data-w-id="55797719-95b5-9f3e-d991-33150963fb19" style="opacity:100" class="divwindowpl">' +
+var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="opacity:1.0" class="divbackgroundblackpl">' +
+'    <div data-w-id="55797719-95b5-9f3e-d991-33150963fb19" style="opacity:0.0" class="divwindowpl">' +
 '      <div class="div1portpl">' +
 '        <div class="div1apl"></div>' +
 '        <div class="div1apl"><div style="margin-top: 30px; width: 60px;"><!--<img src="images/port.link-logo.svg" loading="lazy" width="60" alt="" class="imagepl">-->' +
