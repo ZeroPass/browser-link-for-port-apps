@@ -65,5 +65,8 @@ Call the render script:
 
 Check example in index.html file
 
+## Acknowledgment 
+QR window design inspired by [Anchor Link](https://github.com/greymass/anchor-link)
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
