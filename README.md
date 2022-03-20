@@ -2,7 +2,7 @@
 # Browser link for Port apps
 
 Login widget creates a connection to Port app (using QR code, magnet link or simple copy-paste function).  
-[View demo.](https://htmlpreview.github.io/?https://github.com/ZeroPass/browser-link-for-port-apps/blob/main/index.html)
+[View demo.](https://htmlpreview.github.io/?https://github.com/ZeroPass/browser-link-for-port-apps/blob/dev_hash/index.html)
 
 ## Installation
 
