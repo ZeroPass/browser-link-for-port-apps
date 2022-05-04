@@ -30,6 +30,17 @@
     var callbackFunction = function buttonXpressed() {
       alert("Button X was pressed.");
   }
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  let urlSearchParam = urlParams.get('url');
+  if (urlSearchParam == null)
+    urlSearchParam = prompt("Please enter Port(ZeroPass) server address", "https://");
+
+  let userIDSearchParam = urlParams.get('userID');
+  if (userIDSearchParam == null)
+    userIDSearchParam = prompt("Please user identifier(User ID)", "");
  
     ZeroPassPortWidget.render(shortLinkURL,
                   deepLinkURL,
@@ -38,9 +49,9 @@
                   linkOtherPlatforms,
                   callbackFunction,
                   {
-                    userID: "fartinghouse", 
+                    userID: userIDSearchParam, 
                     requestType: "attestation_request",
-                    url: "https://pomelo.port.link",
+                    url: urlSearchParam,
                     version: 0.1
                   },
                   document.querySelector('#zeropass-port-qr'));
