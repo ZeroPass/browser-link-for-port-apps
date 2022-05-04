@@ -1,8 +1,8 @@
 
-# Browser link for Port apps
+# Browser link for Port apps (dev-version)
 
 Login widget creates a connection to Port app (using QR code, magnet link or simple copy-paste function).  
-[View demo.](https://htmlpreview.github.io/?https://github.com/ZeroPass/browser-link-for-port-apps/blob/main/index.html)
+[View demo.](https://htmlpreview.github.io/?https://github.com/ZeroPass/browser-link-for-port-apps/blob/manual_entries/index.html)
 
 ## Installation
 
@@ -26,6 +26,19 @@ Create [dynamic link ](https://firebase.google.com/docs/dynamic-links/create-lin
 ```
 <link href="<path>/browser-link-for-port-apps.css" rel="stylesheet" type="text/css"> 
 ```
+
+## Dev option
+At the start of page loading 2 prompt is shown (you need to enter url address of server and User Identification). 
+
+In the url link you can write 2 query parameters:
+- URL: url prompt not shown if this parameter is set 
+- userID: userID prompt not shown if this parameter is set 
+
+Example:
+```url
+www.port.link?url=www.server.com&userid=test
+```
+
 
 ## Implementation on website
 
