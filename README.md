@@ -41,7 +41,7 @@ Call the render script:
 <script>
  var androidData = {"apn":"<apn>",
                     "afl":"<link_to_play_store>",
-                "version":'<min_sdk_version>'};
+                "version":"<min_sdk_version>"};
 
  var iosData = {"ibi":"<apple_store_id>",
                 "isi":"<link_to_app_store>",
