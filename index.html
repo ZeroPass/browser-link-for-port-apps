@@ -34,9 +34,9 @@
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
-  let urlSearchParam = urlParams.get('url');
-  if (urlSearchParam == null)
-    urlSearchParam = prompt("Please enter Port(ZeroPass) server address", "https://");
+  //let urlSearchParam = urlParams.get('url');
+  //if (urlSearchParam == null)
+  //  urlSearchParam = prompt("Please enter Port(ZeroPass) server address", "https://");
 
   let userIDSearchParam = urlParams.get('userID');
   if (userIDSearchParam == null)
@@ -51,7 +51,7 @@
                   {
                     userID: userIDSearchParam, 
                     requestType: "attestation_request",
-                    url: urlSearchParam,
+                    url: "https://development.port.link",
                     version: 0.1
                   },
                   document.querySelector('#zeropass-port-qr'));
