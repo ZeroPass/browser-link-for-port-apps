@@ -30,6 +30,15 @@
     var callbackFunction = function buttonXpressed() {
       alert("Button X was pressed.");
   }
+
+    const randomNameGenerator = num => {
+      let res = '';
+      for(let i = 0; i < num; i++){
+        const random = Math.floor(Math.random() * 27);
+        res += String.fromCharCode(97 + random);
+      };
+      return res;
+    };
  
     ZeroPassPortWidget.render(shortLinkURL,
                   deepLinkURL,
@@ -38,9 +47,9 @@
                   linkOtherPlatforms,
                   callbackFunction,
                   {
-                    userID: "fartinghouse", 
+                    userID: randomNameGenerator(12), 
                     requestType: "attestation_request",
-                    url: "https://pomelo.port.link",
+                    url: "https://development.port.link",
                     version: 0.1
                   },
                   document.querySelector('#zeropass-port-qr'));
