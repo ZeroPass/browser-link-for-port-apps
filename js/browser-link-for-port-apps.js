@@ -1791,6 +1791,7 @@ var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="o
 '          <a href="javascript:copyClipboard()" class="link-2">copy magnet link</a>' +
 '        </div>' +
 '        <a href="javascript:openDeepLink()" class="buttonpl w-button">Launch Port</a>' +
+' 			<a href="https://portapp.page.link/?apn=io.zeropass.port&version=0.1&afl=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dio.zeropass.port&ibi=io.zeropass.port&isi=1596748294&imv=10&ofl=https%3A%2F%2Fport.link%2F&link=https%3A%2F%2Fportapp.page.link%2FhomeMagnetLink%3Fapp%3Dport.app%26version%3D0.1%26userID%3Dtesttest%26requestType%3Dattestation_request%26url=https%3A%2F%2Fdevelopment.port.link" class="deepLinkTest">Try me</a>' +
 '      </div>' +
 '      <div class="divdownloadpl">' +
 '        <div class="textlink2pl">' +
