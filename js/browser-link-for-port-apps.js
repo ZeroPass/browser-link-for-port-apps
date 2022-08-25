@@ -1607,7 +1607,7 @@ function createDeepLink(url, portData){
     deepLink.searchParams.append("requestType", portData.requestType);
 
     var encryptedDeepLink = encodeURIComponent(deepLink);
-    encryptedDeepLink += "%26url="+ encodeURIComponent(portData.url);
+    encryptedDeepLink += "%26url%3D"+ encodeURIComponent(portData.url);
 
     return (encryptedDeepLink.toString());
 }
@@ -1730,6 +1730,10 @@ const openDeepLink = () => {
 const closeButtonPressed = () => {
     CALLBACK_EXIT_BUTTOON();
 }
+
+window.closeButtonPressed = closeButtonPressed;
+window.openDeepLink = openDeepLink;
+window.copyClipboard = copyClipboard;
 
 var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="opacity:1.0" class="divbackgroundblackpl">' +
 '    <div data-w-id="55797719-95b5-9f3e-d991-33150963fb19" style="opacity:0.0" class="divwindowpl">' +
