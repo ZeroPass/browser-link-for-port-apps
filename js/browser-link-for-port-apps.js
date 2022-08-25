@@ -1724,7 +1724,6 @@ const copyClipboard = () => {
 
 
 const openDeepLink = () => {
-	alert(DATA_IN_QR);
     window.location.href = DATA_IN_QR;
 };
 
