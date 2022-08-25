@@ -1607,7 +1607,7 @@ function createDeepLink(url, portData){
     deepLink.searchParams.append("requestType", portData.requestType);
 
     var encryptedDeepLink = encodeURIComponent(deepLink);
-    encryptedDeepLink += "%26url="+ encodeURIComponent(portData.url);
+    encryptedDeepLink += "%26url%3D"+ encodeURIComponent(portData.url);
 
     return (encryptedDeepLink.toString());
 }
