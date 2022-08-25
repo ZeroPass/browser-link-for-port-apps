@@ -1731,6 +1731,10 @@ const closeButtonPressed = () => {
     CALLBACK_EXIT_BUTTOON();
 }
 
+window.closeButtonPressed = closeButtonPressed;
+window.openDeepLink = openDeepLink;
+window.copyClipboard = copyClipboard;
+
 var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="opacity:1.0" class="divbackgroundblackpl">' +
 '    <div data-w-id="55797719-95b5-9f3e-d991-33150963fb19" style="opacity:0.0" class="divwindowpl">' +
 '      <div class="div1portpl">' +
