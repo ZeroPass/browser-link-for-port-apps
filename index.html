@@ -14,36 +14,20 @@
     <section id="zeropass-port-qr"></section>
   </div>
   <script>
-    var androidData = {"apn":"io.zeropass.port",
-                        "afl":"https://play.google.com/store/apps/details?id=io.zeropass.port",
-                        "version":'0.1'};
-
-    var iosData = {"ibi":"io.zeropass.port",
-                    "isi":"1596748294",
-                    "imv":10}
-
-    var shortLinkURL = "https://portapp.page.link";
-    var deepLinkURL = "https://portapp.page.link/homeMagnetLink";
-
-    var linkOtherPlatforms = 'https://port.link/';
-
     var callbackFunction = function buttonXpressed() {
       alert("Button X was pressed.");
-  }
+    }
  
-    ZeroPassPortWidget.render(shortLinkURL,
-                  deepLinkURL,
-                  androidData,
-                  iosData,
-                  linkOtherPlatforms,
-                  callbackFunction,
-                  {
-                    userID: "fartinghouse", 
-                    requestType: "attestation_request",
-                    url: "https://pomelo.port.link",
-                    version: 0.1
-                  },
-                  document.querySelector('#zeropass-port-qr'));
+    ZeroPassPortWidget.render(
+      callbackFunction,
+      {
+      userID: "test.email@gmail.com", 
+      requestType: 1,
+      url: "eossupport.port.link",
+      version: 0.2
+    },
+    document.querySelector('#zeropass-port-qr'));
+
   </script>
 </body>
 </html>

@@ -48,25 +48,13 @@ Call the render script:
 
 ```html
 <script>
- var androidData = {"apn":"<apn>",
-                    "afl":"<link_to_play_store>",
-                "version":"<min_sdk_version>"};
 
- var iosData = {"ibi":"<apple_store_id>",
-                "isi":"<link_to_app_store>",
-                "imv":<min_ios_version_integer>}
-
- var shortLinkURL = "<short_link>";
- var deepLinkURL = "<deep_link>";
-
- ZeroPassPortWidget.render(shortLinkURL,
-                           deepLinkURL,
-                           androidData,
-                           iosData,
+ ZeroPassPortWidget.render(callbackFunction
                            { 
                               userID: "<user_id>",
-                              requestType: "<request_type>", //only ATTESTATION_REQUEST, PERSONAL_INFORMATION_REQUEST, FAKE_PERSONAL_INFORMATION_REQUEST, LOGIN allowed
-                              url: "<url>"
+                              version: 0.2,
+                              requestType: "<request_type in int>", //only ATTESTATION_REQUEST = 1, PERSONAL_INFORMATION_REQUEST = 2, FAKE_PERSONAL_INFORMATION_REQUEST = 3, LOGIN = 4 allowed
+                              url: "<url without https://, if start with dot it adds .port.link>"
                            },
                            document.querySelector('#zeropass-port-qr'));
 

@@ -1548,11 +1548,6 @@ function checkIOSparamters(iosParameters){
 
 //check if there are all needed data
 function checkPortParameters(portData){
-    if (!('app' in portData)){
-        console.log('checkPortParameters."app"; parameter not found');
-        return false;
-    }
-
     if (!('version' in portData)){
         console.log('checkPortParameters."version"; parameter not found');
         return false;
@@ -1589,11 +1584,6 @@ function isValidHttpUrl(string) {
   }
 
 function createDeepLink(url, portData){
-    if(isValidHttpUrl(url) == false){
-        console.log ("createDeepLink; URL is not valid. Maybe http(s) is missing.");
-        return;
-    }
-
     if (checkPortParameters(portData) == false){
         console.log ("createDeepLink; parameters do not follow dynamic link rules");
         return;
@@ -1601,54 +1591,16 @@ function createDeepLink(url, portData){
 
     const deepLink = new URL(url);
     console.log(portData.url);
-    deepLink.searchParams.append("app", portData.app);
-    deepLink.searchParams.append("version", portData.version);
-    deepLink.searchParams.append("userID", portData.userID);
-    deepLink.searchParams.append("requestType", portData.requestType);
-
-    var encryptedDeepLink = encodeURIComponent(deepLink);
-    encryptedDeepLink += "%26url%3D"+ encodeURIComponent(portData.url);
-
-    return (encryptedDeepLink.toString());
+    deepLink.searchParams.append("v", portData.version);
+    deepLink.searchParams.append("uID", portData.userID);
+    deepLink.searchParams.append("rt", portData.requestType);
+    deepLink.searchParams.append("url", portData.url);
+    return (deepLink.toString());
 }
 
-function createAndroidParams(URLSearchParams, andoridParams){
-    URLSearchParams.append("apn", andoridParams.apn);
-    URLSearchParams.append("version", andoridParams.version);
-    
-    if(andoridParams.afl != null)
-        URLSearchParams.append("afl", andoridParams.afl);
-    
-    return URLSearchParams;
-}
+function createDynamicLink(portData){
 
-function createIOSParams(URLSearchParams, iosParams){
-    URLSearchParams.append("ibi", iosParams.ibi);
-    URLSearchParams.append("isi", iosParams.isi);
-    URLSearchParams.append("imv", iosParams.imv);
-
-    return URLSearchParams;
-}
-
-function createOtherPlatformsLinkParams(URLSearchParams, linkForOtherPlatforms){
-    URLSearchParams.append("ofl", linkForOtherPlatforms);
-
-    return URLSearchParams;
-}
-
-function createDynamicLink(shortURLlink, deepLinkURL, portData, androidParameters, iosParameters, otherPlatformsLink){
-    if (checkAndroidParameters(androidParameters) == false || checkIOSparamters(iosParameters) == false){
-        console.log ("createDynamicLink; parameters do not follow dynamic link rules");
-        return;
-    }
-    var dynamicLink = new URL(shortURLlink);
-    var urlSearchParams = new URLSearchParams();
-
-    dynamicLink.search = createAndroidParams(urlSearchParams, androidParameters);
-    dynamicLink.search = createIOSParams(urlSearchParams, iosParameters);
-    dynamicLink.search = createOtherPlatformsLinkParams(urlSearchParams, otherPlatformsLink);
-    var deepLinkStr = createDeepLink(deepLinkURL, portData);
-    return dynamicLink.toString() + '&link=' + deepLinkStr;
+    return createDeepLink("port://app", portData);
 }
 
 
@@ -1669,8 +1621,8 @@ function readSettings(text) {
   }
 }
 
-function renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, options) {
-    var dynamicLink = createDynamicLink(shorLinkURL, deepLinkURL, options, androidData, iosData, otherPlatformsLink);
+function renderQrCode(options) {
+    var dynamicLink = createDynamicLink(options);
 
     let container = document.querySelector('#qr-code'),
         settings = readSettings(dynamicLink);
@@ -1681,10 +1633,10 @@ function renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatf
 
     ///////////////////////////////////////////////////
     /*export*/ class ZeroPassPortWidget {
-    static render(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, callbackExitButton, config, $element) {
+    static render(callbackExitButton, config, $element) {
         CALLBACK_EXIT_BUTTOON = callbackExitButton;
-        config.app = "port.app"
-        createWidget(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, config, $element);
+        //config.app = "port.app"
+        createWidget(config, $element);
         
         //changing the opacity of the element
         //start after 50 millisecons
@@ -1705,11 +1657,10 @@ function renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatf
 ZeroPassPortWidget['render'] = ZeroPassPortWidget.render;
 self['ZeroPassPortWidget'] = ZeroPassPortWidget;
 
-
-function createWidget(shorLinkURL, deepLinkURL, androidData, iosData,otherPlatformsLink, options, $element) {
+function createWidget(options, $element) {
     $element.innerHTML += widgetHTML;
 
-    renderQrCode(shorLinkURL, deepLinkURL, androidData, iosData, otherPlatformsLink, options);
+    renderQrCode(options);
     
     }
 
@@ -1730,10 +1681,6 @@ const openDeepLink = () => {
 const closeButtonPressed = () => {
     CALLBACK_EXIT_BUTTOON();
 }
-
-window.closeButtonPressed = closeButtonPressed;
-window.openDeepLink = openDeepLink;
-window.copyClipboard = copyClipboard;
 
 var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="opacity:1.0" class="divbackgroundblackpl">' +
 '    <div data-w-id="55797719-95b5-9f3e-d991-33150963fb19" style="opacity:0.0" class="divwindowpl">' +
@@ -1807,3 +1754,4 @@ var widgetHTML = '<div data-w-id="ab4e72fd-54b3-defa-783f-a5abc41f4420" style="o
 ' crossorigin="anonymous"><\\/script>' +
 ' < script src = "js/webflow.js" type = "text/javascript" ><\\/script>' +
 ' < !--[if lte IE 9]> <script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"><\\/script><![endif] -->';
+
