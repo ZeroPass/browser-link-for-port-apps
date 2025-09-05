@@ -1568,6 +1568,18 @@ function checkPortParameters(portData){
         return false;
     }
 
+    // Validate iDG1 parameter if present (must be 0 or 1)
+    if ('iDG1' in portData && portData.iDG1 !== 0 && portData.iDG1 !== 1) {
+        console.log('checkPortParameters."iDG1"; parameter must be 0 or 1');
+        return false;
+    }
+
+    // Validate iDG2 parameter if present (must be 0 or 1)
+    if ('iDG2' in portData && portData.iDG2 !== 0 && portData.iDG2 !== 1) {
+        console.log('checkPortParameters."iDG2"; parameter must be 0 or 1');
+        return false;
+    }
+
     return true;
 }
 
@@ -1595,6 +1607,15 @@ function createDeepLink(url, portData){
     deepLink.searchParams.append("uID", portData.userID);
     deepLink.searchParams.append("rt", portData.requestType);
     deepLink.searchParams.append("url", portData.url);
+    
+    // Add iDG1 and iDG2 parameters (0 or 1 values)
+    if (portData.iDG1 !== undefined) {
+        deepLink.searchParams.append("iDG1", portData.iDG1);
+    }
+    if (portData.iDG2 !== undefined) {
+        deepLink.searchParams.append("iDG2", portData.iDG2);
+    }
+    
     return (deepLink.toString());
 }
 
