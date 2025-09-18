@@ -55,6 +55,8 @@ Call the render script:
                               version: 0.2,
                               requestType: "<request_type in int>", //only ATTESTATION_REQUEST = 1, PERSONAL_INFORMATION_REQUEST = 2, FAKE_PERSONAL_INFORMATION_REQUEST = 3, LOGIN = 4 allowed
                               url: "<url without https://, if start with dot it adds .port.link>"
+                              iDG1: 1,  // Optional: 0 or 1
+                              iDG2: 0   // Optional: 0 or 1, if 1 then iDG1 must be 1!
                            },
                            document.querySelector('#zeropass-port-qr'));
 
